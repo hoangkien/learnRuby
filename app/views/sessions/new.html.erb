@@ -1,0 +1,16 @@
+<%= form_for(:session, url: sessions_path, method: :post)  do |f| %>
+ <div>
+  <%= f.label :email, "Email" %>
+  <%= f.text_field :email, class: 'form-control', type: 'email' %>   
+ </div>
+ <div>
+   <%= f.label :password, "Password" %>
+   <%= f.password_field :password, class: 'form-control' %>
+ </div>
+ <div>
+   <%= f.submit "Login", :disable_with => 'Logining...' %>
+ </div>
+ <div>
+   <span>New user? <%= link_to"Sign Up now!", new_user_path %></span>
+ </div>
+<% end -%>

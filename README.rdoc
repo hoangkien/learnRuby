@@ -26,3 +26,15 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+== create function signup user use bcrypt
++ In model add has_secure_password
++ Gemfile add gem 'bcrypt'
++ In database add field password_digest
++ In partial _form add field
+  - password
+  - password_confirmation
++ In UsersController
+  - add permit :password, :password_confirmation
+== Issue163
++ we’ll be creating a relationship between two
+instances of the same model.
