@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:index, :edit, :update ]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -71,4 +72,11 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    def require_login
+      if session[:user_id].nil?
+        redirect_to new_session_path
+      end
+    end
+
 end

@@ -1,3 +1,9 @@
+<% if login? %>
+  <%= link_to "Log_out", session_path(current_user), method: :Delete %>
+<% else %>
+  <%= link_to "Login", new_session_path %>
+<% end -%>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Users</h1>
@@ -19,7 +25,7 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add friend', friendships_path(friend_id: user), method: post %></td>
+        <td><%= link_to 'Add friend', friendships_path(friend_id: user), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
