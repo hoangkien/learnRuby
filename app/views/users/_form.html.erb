@@ -1,0 +1,34 @@
+<%= form_for :user, url:users_path, html: { role:'form'}, method: :post do |f|%>
+  <div class="form-group">
+    <%= f.label :full_name, "Full Name" %>
+    <%= f.text_field :full_name %>
+    <% if @user.errors[:full_name] %>
+      <label class="label label-danger"><%= @user.errors[:full_name].first %></label>
+    <% end -%>
+  </div>
+  <div>
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email, type: 'email' %>
+    <% if @user.errors[:email] %>
+      <label class="label label-danger"><%= @user.errors[:email].first %></label>
+    <% end -%>
+  </div>
+  <div>
+    <%= f.label :password, "Password" %>
+    <%= f.text_field :password, type: 'password' %>
+    <% if @user.errors[:password] %>
+      <label class="label label-danger"><%= @user.errors[:password].first %></label>
+    <% end -%>
+    
+  </div>
+  <div>
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.text_field :password_confirmation, type: 'password' %>
+    <% if @user.errors[:password_confirmation] %>
+      <label class="label label-danger"><%= @user.errors[:password_confirmation].first %></label>
+    <% end -%>
+  </div>
+  <div>
+    <%= f.submit "Submit", :disable_with => 'Submiting...', class: 'btn btn-primary' %>
+  </div>
+<% end -%>  

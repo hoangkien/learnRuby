@@ -1,0 +1,28 @@
+class UsersController < ApplicationController
+  before_action :user_params, only: [:create]
+  
+  def index
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to users_path, notice: 'Dang nhap thanh cong'
+    else
+      flash[:error] = 'invalid email/password'
+      render :new
+    end
+  end
+
+  private
+
+   def user_params
+    params.require(:user).permit(:full_name, :email, :password, :password_confirmation)
+   end
+
+end
