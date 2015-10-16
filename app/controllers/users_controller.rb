@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path, notice: 'Dang nhap thanh cong'
     else
-      flash[:error] = 'invalid email/password'
       render :new
     end
   end
