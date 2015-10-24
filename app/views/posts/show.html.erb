@@ -1,6 +1,55 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<div class="well">
+    <div class="media">
+    <a class="pull-left" href="#">
+      <%= image_tag("sticky-post.png")%>
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><%= @post.title %></h4>
+        <p class="text-right">post by <%= User.find(@post.user_id).email %></p>
+        <p><%= raw @post.body%></p>
+        <ul class="list-inline list-unstyled">
+          <li><span><i class="fa fa-calendar"></i>&nbsp;&nbsp;<%= time_ago_in_words(@post.created_at)%></span></li>
+          <li>|</li>
+          <li><span><i class="fa fa-comments"></i>&nbsp;&nbsp;<%= @post.comments.count %> <%= link_to 'comments', @post %></span></li>
+          <% if user_signed_in? && current_user.id == @post.user_id%>
+            <li>|</li>
+              <li><span><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;<%= link_to 'Edit', edit_post_path(@post) %></span></li>
+            <li>|</li>
+              <li><span><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %></span></li>
+          <% end -%>
+          <li>|</li>
+          <li>
+          <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+            <span><i class="fa fa-facebook-square"></i></span>
+            <span><i class="fa fa-twitter-square"></i></span>
+            <span><i class="fa fa-google-plus-square"></i></span>
+          </li>
+        </ul>
+        <!-- Comment -->
+        <h4>Comments</h4>
+        <div class="comment">
+          <%= render @post.comments %>
+        </div>
+        <h4>Add a comment:</h4>
+        <div class="tab-pane" id="add-comment">
+            <%= form_for [@post, @post.comments.build], html: { remote:true, role: 'form', class: 'form-horizontal'} do |f| %> 
+                <div class="form-group">
+                    
+                    <div class="col-sm-10">
+                      <%= f.text_area :body, class: 'form-control', rows:"5" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10" style="margin:0px;">                    
+                        <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span><i class="fa fa-paper-plane-o"></i></span> Summit comment</button>
+                    </div>
+                </div>            
+            <% end -%>
+        </div>
+   </div>
+  </div>
+</div>
+<!-- <p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
@@ -10,5 +59,16 @@
   <%= @post.body %>
 </p>
 
+<h2>Add a comment:</h2>
+<%= form_for [@post, @post.comments.build], html: { remote:true} do |f| %>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path %> -->
+

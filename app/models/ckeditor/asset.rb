@@ -1,0 +1,2 @@
+class Ckeditor::Asset
+end

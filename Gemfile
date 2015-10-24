@@ -46,3 +46,11 @@ group :development do
 end
 
 gem 'devise'
+
+gem 'devise-bootstrap-views'
+
+gem "twitter-bootstrap-rails"
+
+gem 'ionicons-rails'
+
+gem 'ckeditor'

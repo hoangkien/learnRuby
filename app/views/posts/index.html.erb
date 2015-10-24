@@ -1,29 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+<div class="container">
+  <% @posts.each do |post| %>
+    <div class="well">
+        <div class="media">
+        <a class="pull-left" href="#">
+          <%= image_tag("sticky-post.png")%>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><%= post.title %></h4>
+            <p class="text-right">post by <%= User.find(post.user_id).email %></p>
+            <p><%= post.body%></p>
+            <ul class="list-inline list-unstyled">
+          <li><span><i class="fa fa-calendar"></i>&nbsp;&nbsp;<%= time_ago_in_words(post.created_at)%></span></li>
+              <li>|</li>
+              <span><i class="fa fa-comments"></i>&nbsp;&nbsp;<%= post.comments.count %> <%= link_to 'comments', post %></span>
+              <% if user_signed_in? && current_user.id == post.user_id%>
+                <li>|</li>
+                  <span><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;<%= link_to 'Edit', edit_post_path(post) %></span>
+                <li>|</li>
+                  <span><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <% end -%>
+              <li>|</li>
+              <li>
+              <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+                <span><i class="fa fa-facebook-square"></i></span>
+                <span><i class="fa fa-twitter-square"></i></span>
+                <span><i class="fa fa-google-plus-square"></i></span>
+              </li>
+        </ul>
+         </div>
+      </div>
+    </div>
+  <% end -%>
+  <%= link_to 'New Post', new_post_path %>
+</div>
